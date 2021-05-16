@@ -28,7 +28,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         return post.comments.all()
 
     def perform_create(self, serializer):
+        get_object_or_404(Post, id=self.kwargs.get('id'))
         serializer.save(
-            author=self.request.user,
-            post=get_object_or_404(Post, id=self.kwargs.get('id'))
+            author=self.request.user
         )
